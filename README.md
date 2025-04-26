@@ -44,7 +44,7 @@
 ## 📸 صورة للمشروع
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/iraqies/islamiatracker/main/lessons_progress%20(1).png" width="80%" />
+  <img src="https://raw.githubusercontent.com/iraqies/islamiatracker/main/lessons_progress.png" width="80%" />
 </div>
 
 ---
@@ -103,7 +103,7 @@ It works fully inside the browser — no server needed — and saves your progre
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/iraqies/islamiatracker/main/lessons_progress%20(1).png" width="80%" />
+  <img src="https://raw.githubusercontent.com/iraqies/islamiatracker/main/lessons_progress.png" width="80%" />
 </div>
 
 ---
