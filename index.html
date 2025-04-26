@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>📚 جدول الدروس</title>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 20px;
+      background-color: #f4f6f8;
+      color: #000;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    body.dark-mode {
+      background-color: #121212;
+      color: #eee;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    
+    .dark-mode table {
+      background-color: #1e1e1e;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+    
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: center;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    
+    th {
+      background-color: #eee;
+      transition: background-color 0.3s;
+    }
+    
+    .dark-mode th {
+      background-color: #333;
+    }
+    
+    .dark-mode td, .dark-mode th {
+      border-color: #555;
+    }
+    
+    .done {
+      background-color: #d4edda;
+      transition: background-color 0.3s;
+    }
+    
+    .dark-mode .done {
+      background-color: #2e7d32;
+    }
+    
+    .pending {
+      background-color: #f8d7da;
+      transition: background-color 0.3s;
+    }
+    
+    .dark-mode .pending {
+      background-color: #b71c1c;
+    }
+    
+    button, select {
+      padding: 8px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    
+    button:hover, select:hover {
+      background-color: #0056b3;
+    }
+    
+    .progress {
+      background-color: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 20px 0;
+      transition: background-color 0.3s;
+    }
+    
+    .dark-mode .progress {
+      background-color: #333;
+    }
+    
+    .progress-bar {
+      background-color: #28a745;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      transition: width 0.5s, background-color 0.3s;
+    }
+    
+    .dark-mode .progress-bar {
+      background-color: #00c853;
+    }
+    
+    .top-buttons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📚 قائمة الدروس</h1>
+
+  <div class="top-buttons">
+    <select id="materialSelector" onchange="changeMaterial()">
+      <option value="sajid">📘 ملزمة ساجد العكيلي</option>
+      <option value="book">📗 كتاب التربية الإسلامية</option>
+    </select>
+    <br><br>
+    <button onclick="capturePage()">📸 أخذ لقطة</button>
+    <button onclick="resetProgress()">🔄 إعادة التعيين</button>
+    <button onclick="toggleDarkMode()">🌙 تبديل الوضع الليلي</button>
+  </div>
+
+  <div class="progress">
+    <div id="progressBar" class="progress-bar" style="width: 0%;">0%</div>
+  </div>
+
+  <table id="lessonsTable">
+    <thead>
+      <tr>
+        <th>العنوان</th>
+        <th>عدد الصفحات</th>
+        <th>الحالة</th>
+        <th>الوحدة</th>
+        <th>التصنيف</th>
+        <th>تحديد كمكتمل</th>
+      </tr>
+    </thead>
+    <tbody id="lessonBody">
+      <!-- يتم تعبئتها تلقائيًا -->
+    </tbody>
+  </table>
+
+  <script>
+    const materials = {
+      sajid: [
+        { id: 1, title: "نظرة عامة للنظام الاقتصادي في الإسلام", pages: 9, unit: "الوحدة الثالثة", category: "أبحاث" },
+        { id: 2, title: "الإسراء", pages: 7, unit: "الوحدة الرابعة", category: "من القرآن الكريم" },
+        { id: 3, title: "نظام الأسرة في الإسلام", pages: 6, unit: "الوحدة الأولى", category: "أبحاث" },
+        { id: 4, title: "الوظائف الاقتصادية للدولة", pages: 6, unit: "الوحدة الرابعة", category: "أبحاث" },
+        { id: 5, title: "التسامح والتعايش السلمي", pages: 5, unit: "الوحدة الخامسة", category: "أبحاث" },
+        { id: 6, title: "سورة الأنبياء", pages: 5, unit: "الوحدة الخامسة", category: "من القرآن الكريم" },
+        { id: 7, title: "من سورة النساء", pages: 5, unit: "الوحدة الثالثة", category: "من القرآن الكريم" },
+        { id: 8, title: "من سورة البقرة", pages: 5, unit: "الوحدة الأولى", category: "من القرآن الكريم" },
+        { id: 9, title: "من سورة آل عمران", pages: 4, unit: "الوحدة الثانية", category: "من القرآن الكريم" },
+        { id: 10, title: "مريم بنت عمران (ع)", pages: 4, unit: "الوحدة الثانية", category: "من قصص القرآن" },
+        { id: 11, title: "حقوق الزوجين وواجباتهما", pages: 4, unit: "الوحدة الثانية", category: "أبحاث" },
+        { id: 12, title: "القناعة", pages: 4, unit: "الوحدة الخامسة", category: "التهذيب" },
+        { id: 13, title: "أصحاب الكهف", pages: 4, unit: "الوحدة الأولى", category: "من قصص القرآن" },
+        { id: 14, title: "الناجون يوم القيامة", pages: 4, unit: "الوحدة الثانية", category: "من الحديث الشريف" },
+        { id: 15, title: "حسن الأخلاق", pages: 3, unit: "الوحدة الخامسة", category: "من الحديث الشريف" },
+        { id: 16, title: "الرجولة", pages: 3, unit: "الوحدة الثالثة", category: "التهذيب" },
+        { id: 17, title: "موسى والعبد الصالح (ع)", pages: 3, unit: "الوحدة الثالثة", category: "من قصص القرآن" },
+        { id: 18, title: "شعيب (ع)", pages: 3, unit: "الوحدة الرابعة", category: "من قصص القرآن" },
+        { id: 19, title: "التعاون بين المسلمين", pages: 3, unit: "الوحدة الأولى", category: "من الحديث الشريف" },
+        { id: 20, title: "النهي عن الغضب", pages: 3, unit: "الوحدة الأولى", category: "التهذيب" },
+        { id: 21, title: "محاسبة النفس", pages: 2, unit: "الوحدة الثالثة", category: "من الحديث الشريف" },
+        { id: 22, title: "في الجهاد وكرامة المجاهد", pages: 2, unit: "الوحدة الرابعة", category: "من الحديث الشريف" },
+        { id: 23, title: "التكبر", pages: 2, unit: "الوحدة الرابعة", category: "التهذيب" },
+        { id: 24, title: "قصص وعبر", pages: 2, unit: "الوحدة الثانية", category: "التهذيب" },
+        { id: 25, title: "نبأ الفاسق", pages: 1, unit: "الوحدة الخامسة", category: "من قصص القرآن" }
+      ],
+      book: [
+        { id: 1, title: "من سورة البقرة", pages: 10, unit: "الوحدة الأولى", category: "من القرآن الكريم" },
+        { id: 2, title: "اصحاب الكهف", pages: 6, unit: "الوحدة الأولى", category: "من قصص القرآن" },
+        { id: 3, title: "التعاون بين المسلمين", pages: 5, unit: "الوحدة الأولى", category: "من الحديث الشريف" },
+        { id: 4, title: "نظام الأسرة في الإسلام", pages: 10, unit: "الوحدة الأولى", category: "أبحاث" },
+        { id: 5, title: "النهي عن الغضب", pages: 5, unit: "الوحدة الأولى", category: "التهذيب" },
+        { id: 6, title: "من سورة آل عمران", pages: 4, unit: "الوحدة الثانية", category: "من القرآن الكريم" },
+        { id: 7, title: "مريم بنت عمران (ع)", pages: 8, unit: "الوحدة الثانية", category: "من قصص القرآن" },
+        { id: 8, title: "الناجون يوم القيامة", pages: 6, unit: "الوحدة الثانية", category: "من الحديث الشريف" },
+        { id: 9, title: "حقوق الزوجين وواجباتهما", pages: 6, unit: "الوحدة الثانية", category: "أبحاث" },
+        { id: 10, title: "قصص وعبر", pages: 2, unit: "الوحدة الثانية", category: "التهذيب" },
+        { id: 11, title: "من سورة النساء", pages: 7, unit: "الوحدة الثالثة", category: "من القرآن الكريم" },
+        { id: 12, title: "موسى والعبد الصالح (ع)", pages: 6, unit: "الوحدة الثالثة", category: "من قصص القرآن" },
+        { id: 13, title: "محاسبة النفس", pages: 3, unit: "الوحدة الثالثة", category: "من الحديث الشريف" },
+        { id: 14, title: "نظرة عامة للنظام الاقتصادي", pages: 11, unit: "الوحدة الثالثة", category: "أبحاث" },
+        { id: 15, title: "الرجولة", pages: 5, unit: "الوحدة الثالثة", category: "التهذيب" },
+        { id: 16, title: "الإسراء", pages: 11, unit: "الوحدة الرابعة", category: "من القرآن الكريم" },
+        { id: 17, title: "شعيب (ع)", pages: 7, unit: "الوحدة الرابعة", category: "من قصص القرآن" },
+        { id: 18, title: "في الجهاد وكرامة المجاهد", pages: 3, unit: "الوحدة الرابعة", category: "من الحديث الشريف" },
+        { id: 19, title: "الوظائف الاقتصادية للدولة", pages: 7, unit: "الوحدة الرابعة", category: "أبحاث" },
+        { id: 20, title: "التكبر", pages: 3, unit: "الوحدة الرابعة", category: "التهذيب" },
+        { id: 21, title: "سورة الأنبياء", pages: 9, unit: "الوحدة الخامسة", category: "من القرآن الكريم" },
+        { id: 22, title: "نبأ الفاسق", pages: 2, unit: "الوحدة الخامسة", category: "من قصص القرآن" },
+        { id: 23, title: "حسن الخلق", pages: 5, unit: "الوحدة الخامسة", category: "من الحديث الشريف" },
+        { id: 24, title: "التسامح والتعايش السلمي", pages: 8, unit: "الوحدة الخامسة", category: "أبحاث" },
+        { id: 25, title: "القناعة", pages: 7, unit: "الوحدة الخامسة", category: "التهذيب" }
+      ]
+    };
+
+    let completedLessons = JSON.parse(localStorage.getItem('completedLessons')) || [];
+    let currentMaterial = 'sajid';
+    let darkMode = localStorage.getItem('darkMode') === 'true';
+
+    // Apply dark mode on load if it was enabled
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    }
+
+    function saveProgress() {
+      localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+      localStorage.setItem('darkMode', darkMode);
+    }
+
+    function toggleDone(id) {
+      if (completedLessons.includes(id)) {
+        completedLessons = completedLessons.filter(l => l !== id);
+      } else {
+        completedLessons.push(id);
+      }
+      saveProgress();
+      renderLessons();
+    }
+
+    function resetProgress() {
+      if (confirm("هل أنت متأكد أنك تريد إعادة التقدم؟")) {
+        completedLessons = [];
+        saveProgress();
+        renderLessons();
+      }
+    }
+
+    function changeMaterial() {
+      currentMaterial = document.getElementById('materialSelector').value;
+      renderLessons();
+    }
+
+    function toggleDarkMode() {
+      darkMode = !darkMode;
+      document.body.classList.toggle('dark-mode', darkMode);
+      saveProgress();
+    }
+
+    function renderLessons() {
+      const tbody = document.getElementById('lessonBody');
+      tbody.innerHTML = '';
+      const lessons = materials[currentMaterial];
+
+      lessons.sort((a, b) => b.pages - a.pages);
+
+      lessons.forEach(lesson => {
+        const id = currentMaterial + lesson.id;
+        const tr = document.createElement('tr');
+        tr.className = completedLessons.includes(id) ? 'done' : 'pending';
+        tr.innerHTML = `
+          <td>${lesson.title}</td>
+          <td>${lesson.pages}</td>
+          <td>${completedLessons.includes(id) ? '✅' : '⏳'}</td>
+          <td>${lesson.unit}</td>
+          <td>${lesson.category}</td>
+          <td><button onclick="toggleDone('${id}')">${completedLessons.includes(id) ? 'إلغاء' : 'إنهاء'}</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      const doneCount = lessons.filter(lesson => completedLessons.includes(currentMaterial + lesson.id)).length;
+      const progress = Math.floor((doneCount / lessons.length) * 100);
+      const progressBar = document.getElementById('progressBar');
+      progressBar.style.width = progress + '%';
+      progressBar.textContent = progress + '%';
+    }
+
+    function capturePage() {
+      html2canvas(document.body).then(function(canvas) {
+        let link = document.createElement('a');
+        link.download = 'lessons_progress.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+
+    // بداية التطبيق
+    renderLessons();
+  </script>
+
+</body>
+</html>
