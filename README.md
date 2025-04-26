@@ -41,9 +41,11 @@
 
 ---
 
-## 📸 لقطات شاشة
+## 📸 صورة للمشروع
 
-(يمكنك لاحقاً إضافة صورة هنا)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/iraqies/islamiatracker/main/lessons_progress%20(1).png" width="80%" />
+</div>
 
 ---
 
@@ -100,7 +102,9 @@ It works fully inside the browser — no server needed — and saves your progre
 
 ## 📸 Screenshots
 
-(You can later add a screenshot here.)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/iraqies/islamiatracker/main/lessons_progress%20(1).png" width="80%" />
+</div>
 
 ---
 
