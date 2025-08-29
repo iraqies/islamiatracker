@@ -1,129 +1,62 @@
 # 📚 متعقب دروس التربية الإسلامية | Islamic Lessons Tracker
 
----
-
-<div align="center">
-  <a href="#arabic"> 🇮🇶 العربية </a> | <a href="#english"> 🇬🇧 English </a>
-</div>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/iraqies/islamiatracker/refs/heads/main/Logo.png" alt="Logo" width="200">
+</p>
 
 ---
 
-<div dir="rtl" align="right">
+## 🇸🇦 بالعربية
 
-# 🇮🇶 العربية
+### ✨ الوصف
+أداة بسيطة لتتبع تقدم دروس مادة التربية الإسلامية والتخطيط للدراسة بسهولة.  
 
-## 📚 حول المشروع
+### 🔗 روابط
+- [المشروع على GitHub Pages](https://iraqies.github.io/islamiatracker/)
 
-هذا مشروع بسيط لتتبع تقدم دروس مادة **التربية الإسلامية** والتخطيط للدراسة بسهولة.  
-يعمل بالكامل داخل المتصفح بدون الحاجة إلى خادم، ويحفظ تقدمك باستخدام التخزين المحلي (localStorage)، حتى لو أغلقت الصفحة.
+### 📸 المميزات
+- تتبع التقدم في الدروس ✅  
+- شريط تقدم مرئي 📊  
+- دعم الوضع الليلي 🌙  
+- إمكانية حفظ لقطة للشاشة 📷  
+- اختيار بين **ملزمة ساجد العكيلي** أو **كتاب التربية الإسلامية** 📘📗  
 
----
+### 🚀 كيفية الاستخدام
+1. افتح الرابط أعلاه.  
+2. اختر المصدر (الملزمة / الكتاب).  
+3. حدّد الدروس المكتملة.  
+4. راقب تقدّمك عبر الشريط الأخضر.  
+5. يمكنك إعادة التعيين أو أخذ لقطة للشاشة عند الحاجة.  
 
-## 🚀 المميزات
-
-• عرض قائمة الدروس مرتبة من الأطول إلى الأقصر.  
-• تحديد الدروس كمكتملة أو غير مكتملة بسهولة.  
-• عرض نسبة التقدم بشريط تفاعلي.  
-• التقاط صورة للجدول بضغطة زر واحدة.  
-• إمكانية إعادة تعيين التقدم.  
-• دعم اللغة العربية والإنجليزية.  
-• حفظ التقدم بشكل تلقائي داخل المتصفح.
-
----
-
-## 🎯 طريقة الاستخدام
-
-١. افتح الموقع مباشرة عبر الرابط التالي:
-
-   🔗 [اضغط هنا لفتح الموقع](https://iraqies.github.io/islamiatracker)
-
-٢. ابدأ بتحديد الدروس التي أنهيتها!
+### ✍️ صُنِع بواسطة
+**حسنين حميد مجيد**  
 
 ---
 
-## 📸 صورة للمشروع
+## 🇬🇧 In English
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/iraqies/islamiatracker/main/lessons_progress.png" width="80%" />
-</div>
+### ✨ Description
+A simple tool to track your progress in Islamic Studies lessons and plan your study with ease.  
 
----
+### 🔗 Links
+- [Project on GitHub Pages](https://iraqies.github.io/islamiatracker/)
 
-## 🛠 مبني باستخدام
+### 📸 Features
+- Track lesson progress ✅  
+- Visual progress bar 📊  
+- Dark mode support 🌙  
+- Capture screenshot 📷  
+- Switch between **Sajid Al-Ukaili’s notes** or the official **Islamic Studies book** 📘📗  
 
-• HTML5  
-• CSS3  
-• JavaScript (Vanilla)  
-• LocalStorage API  
-• html2canvas.js (لالتقاط الصور)
+### 🚀 How to Use
+1. Open the link above.  
+2. Select the source (notes / book).  
+3. Mark completed lessons.  
+4. Watch your progress bar fill up.  
+5. Reset or capture a screenshot whenever you want.  
 
----
-
-## ✍️ المؤلف
-
-تم التطوير بواسطة واحد عراقي
-
-</div>
-
----
-
-<div dir="ltr" align="left">
-
-# 🇬🇧 English
-
-## 📚 About the Project
-
-This is a simple project to **track the progress** of Islamic Studies lessons and **plan your study** easily.  
-It works fully inside the browser — no server needed — and saves your progress locally even after closing the page.
+### ✍️ Made by
+**iraqies**  
 
 ---
 
-## 🚀 Features
-
-- List of lessons sorted from longest to shortest.
-- Mark lessons as completed or not completed easily.
-- Live progress bar showing your completion percentage.
-- Capture a screenshot of your lessons table.
-- Reset your progress anytime.
-- Supports both Arabic and English languages.
-- Saves your progress automatically inside the browser (localStorage).
-
----
-
-## 🎯 How to Use
-
-1. Open the live site directly at:
-
-   🔗 [Click here to open the site](https://iraqies.github.io/islamiatracker)
-
-2. Start marking the lessons you have finished!
-
----
-
-## 📸 Screenshots
-
-<div align="center">
-  <img src="https://raw.githubusercontent.com/iraqies/islamiatracker/main/lessons_progress.png" width="80%" />
-</div>
-
----
-
-## 🛠 Built With
-
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
-- LocalStorage API
-- html2canvas.js (for screenshots)
-
----
-
-## ✍️ Author
-
-Developed with ❤️ by Iraqies
-
-</div>
-
----
-
-> 📢 Open-source project — feel free to use, improve, and share it!
